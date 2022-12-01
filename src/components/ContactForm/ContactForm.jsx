@@ -1,7 +1,9 @@
 import { Formik, Form } from 'formik';
-import { useDispatch } from 'react-redux';
-import { addContacts } from 'redux/contactsSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { addContact } from 'redux/operation';
+import { selectContacts } from 'redux/selectors';
 import { schema } from './Shema';
+import { toast } from 'react-toastify';
 import {
   InputItem,
   Input,
@@ -17,9 +19,17 @@ const initialValues = {
 
 const ContactForm = () => {
   const dispatch = useDispatch();
+  const contacts = useSelector(selectContacts);
 
   const handleSubmit = (values, { resetForm }) => {
-    dispatch(addContacts(values));
+    const name = values.name;
+    for (const contact of contacts) {
+      if (contact.name === name) {
+        toast.info('This contact exist in your list');
+        return;
+      }
+    }
+    dispatch(addContact(values));
     resetForm();
   };
 
