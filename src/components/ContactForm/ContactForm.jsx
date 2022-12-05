@@ -24,7 +24,7 @@ const ContactForm = () => {
   const handleSubmit = (values, { resetForm }) => {
     const name = values.name;
     for (const contact of contacts) {
-      if (contact.name === name) {
+      if (contact.name.toLowerCase() === name.toLowerCase()) {
         toast.info('This contact exist in your list');
         return;
       }

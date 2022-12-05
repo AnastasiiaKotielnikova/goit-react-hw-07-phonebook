@@ -10,7 +10,7 @@ const ContactListItem = ({ contact }) => {
   return (
     <Container>
       <p>
-        {contact.name}:<span>{contact.phone}</span>
+        {contact.name}:<span>{contact.number}</span>
       </p>
       <button type="button" onClick={handleDelete}>
         Delete
